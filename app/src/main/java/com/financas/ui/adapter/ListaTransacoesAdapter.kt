@@ -6,18 +6,27 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.financas.R
+import com.financas.ui.model.Transacao
+import kotlinx.android.synthetic.main.transacao_item.view.*
 
-class ListaTransacoesAdapter(transacoes: List<String>,
-                             context: Context) : BaseAdapter() {
+class ListaTransacoesAdapter(
+    transacoes: List<Transacao>,
+    context: Context) : BaseAdapter() {
 
     private val transacoes = transacoes
     private val context = context
 
     override fun getView(posicao: Int, view: View?, parent: ViewGroup?): View {
-        return LayoutInflater.from(context).inflate(R.layout.transacao_item, parent, false)
+        val viewCriada = LayoutInflater.from(context).inflate(R.layout.transacao_item, parent, false)
+
+        val transacao = transacoes[posicao]
+
+        viewCriada.transacao_valor.setText(transacao.valor.toString())
+
+        return viewCriada
     }
 
-    override fun getItem(posicao: Int): String {
+    override fun getItem(posicao: Int): Transacao {
         return transacoes[posicao]
     }
 
